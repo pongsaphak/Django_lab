@@ -1,0 +1,65 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+    <style>
+    h1 {
+        text-align: center;
+        color: black
+    }
+    h2{
+        color: black;
+    }
+    </style>
+    <h1>การ์ตูที่ชอบ</h1>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form action="{% url 'todo:create' %}" method="post">
+        {% csrf_token %}
+        <!-- Todo Name -->
+        <div class="form-group">
+            <label for="todo" class="col-sm-3 control-label">ชื่อการ์ตูน<label>
+            <div class="col-sm-5">
+                {{ form.body }}
+            </div>
+        </div>
+
+        <!-- Add Todo Button -->
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-6">
+                <button type="submit" class="btn btn-default">
+                    <i class="fa fa-plus"></i> Add 
+                </button>
+            </div>
+        </div>
+
+    </form>
+    
+
+    <!-- Current Todos -->
+    <h2>List</h2>
+    <table class="table table-striped todo-table">
+        <thead>
+            <th>รายชื่อการ์ตูนที่ชอบ</th><th>&nbsp;</th>
+        </thead>
+
+        <tbody>
+            {% for post in posts %}
+                <tr>
+                    <!-- Todo Name -->
+                    <td>
+                        <div>{{ post.body }}</div>
+                    </td>
+                    <td>
+                        <form action="{% url 'todo:delete' post.id %}" method="post">
+                            {% csrf_token %}
+                            <button>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/mfqJyKm20Z4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+{% endblock %}
