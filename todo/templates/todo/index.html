@@ -18,9 +18,15 @@
         {% csrf_token %}
         <!-- Todo Name -->
         <div class="form-group">
-            <label for="todo" class="col-sm-3 control-label">ชื่อการ์ตูน<label>
+            <label for="todo" class="col-sm-3 control-label">ชื่อ<label>
             <div class="col-sm-5">
                 {{ form.body }}
+                
+            </div>
+            <label for="todo" class="col-sm-3 control-label">ชื่อการ์ตูน<label>
+            <div class="col-sm-5">
+                {{ form.text }}
+                
             </div>
         </div>
 
@@ -48,7 +54,11 @@
                 <tr>
                     <!-- Todo Name -->
                     <td>
-                        <div>{{ post.body }}</div>
+                        <div>
+                            {{ post.body }}
+                            .....    
+                            {{ post.text }}
+                        </div>
                     </td>
                     <td>
                         <form action="{% url 'todo:delete' post.id %}" method="post">
